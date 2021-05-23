@@ -1,0 +1,122 @@
+.MainDiv{
+    overflow: auto;
+    background-color: #f4f5f7;
+    height: 100%;
+    padding-bottom: 58px;
+
+}
+h1{
+    margin:8%;
+}
+
+.listDishes{
+    text-align: -webkit-center;
+}
+.divImage{
+    position: relative;
+    height: 150px;
+}
+
+.ulRests{
+    display: contents;
+    padding: 0;
+    margin: 0;
+}
+
+.ulRests li{
+    padding-bottom: 4px;
+    margin: 8px;
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+
+    list-style-type: none;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    margin-bottom: 3px;
+}
+.divDetails{
+    padding-top: 3px;
+}
+
+.dishName{
+    color: white;
+    background-color: rgb(190, 190, 190,0.6);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin: 0px;
+}
+.restName{
+    text-align: right;
+    margin-right: 1%;
+font-size: 12px;
+margin-top: -3px;
+margin-bottom: -3px;
+}
+.restType{
+    text-align: right;
+    margin-right: 1%;
+font-size: 12px;
+margin-top: -3px;
+margin-bottom: -3px;
+}
+.restAddress{
+    text-align: right;
+    margin-right: 1%;
+    font-size: 12px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+.restDistance{
+ font-size: 14px;
+ margin-bottom: 0;
+}
+.restRank{
+    margin-right: 2px;
+    font-size: 15px;
+}
+.rankIcon{
+    font-size: 13px;
+    margin: 0 auto;
+}
+.RankDiv{
+    display: inline-flex;
+}
+.ButtonClass{
+    padding-left: 20px;
+    padding-right: 20px;
+    width:100%;
+}
+.ButtonClass .btn{
+    width: 90%;
+}
+.favor{
+    position: absolute;
+    top: -5%;
+    left: 91%;
+    font-size: 30px;
+}
+
+  /* .divImage i.fa {
+    border: 2px solid #fff;
+    border-radius: 60px;
+    color: #fff;
+    display: inline-block;
+    height: 30px;
+    margin: 5px;
+    padding: 15px;
+    width: 30px;
+  } */
+
+
+  .fa-heart g g path{
+    stroke: black;
+    stroke-width: 10;
+  }
+  .red .fa-heart g g path{
+      color:red;
+  }

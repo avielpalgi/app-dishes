@@ -1,0 +1,51 @@
+h1{
+    font-size: 20px;
+}
+.SearchDiv{
+    padding:6%;
+}
+.search-wrapper{
+    text-align: right;
+}
+.optionListContainer{
+    text-align: right;
+    width: none;
+
+}
+.optionListContainer input{
+    margin-left: 3px;
+}
+.search-wrapper input{
+    text-align: right;
+    width: 100%;
+}
+.selects{
+}
+.selects input{
+}
+
+.ListRest{
+   
+}
+.card{
+    direction: rtl;
+}
+.card-header button{
+    text-align: right;
+    width: 100%;
+}
+.listFood{
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+}
+.listFood li{
+    text-align: right;
+}
+.listFood li p{
+    margin:1px;
+}
+.listFood li h5{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
