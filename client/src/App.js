@@ -68,7 +68,10 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
 
 
   useEffect(() => {
-    //dispatchLoading();
+      fetch('/app/dish')
+         .then((data) => data.text())
+         .then((res) => console.log(res));
+    dispatchLoading();
     if (user.isLoggedIn) {
       GetUserFavorites();
     }
@@ -121,7 +124,7 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
   }
 
   const getDistanceFromPosition = async (location) => {
-    //dispatchLoading();
+    dispatchLoading();
     let Temlocaiton = {
       latitude: location.lat,
       longitude: location.lng
