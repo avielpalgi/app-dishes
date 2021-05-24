@@ -86,6 +86,7 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
       })
     })
       .then((res) => {
@@ -148,10 +149,12 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
   }
 
   const GetUserFavorites = () => {
+    console.log("here");
     fetch('/app/favorites/' + user.userId, {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
       })
     })
       .then((res) => {
