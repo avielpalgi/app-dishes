@@ -1,0 +1,109 @@
+
+.divDetails{
+    padding-top: 3px;
+}
+.card{
+    width: 90%;
+    margin:10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.card-header{
+    position: relative;
+    padding: 0;
+}
+.card-body{
+    padding:2px;
+}
+.card-img-top{
+    width: 100%;
+    height: 180px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.dishName{
+    color: white;
+    background-color: rgb(190, 190, 190,0.6);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin: 0px;
+}
+.restName{
+    text-align: right;
+    margin-right: 1%;
+font-size: 12px;
+margin-top: -3px;
+margin-bottom: -3px;
+}
+.restType{
+    text-align: right;
+    margin-right: 1%;
+font-size: 12px;
+margin-top: -3px;
+margin-bottom: -3px;
+}
+.restAddress{
+    text-align: right;
+    margin-right: 1%;
+    font-size: 12px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+}
+.DishDetails{
+    text-align: right;
+    margin-right: 1%;
+    font-size: 13px;
+    margin-top: -3px;
+    margin-bottom: -3px;
+    font-weight: 600;
+}
+.restDistance{
+ font-size: 14px;
+ margin-bottom: 0;
+}
+.restRank{
+    margin-right: 2px;
+    font-size: 15px;
+}
+.rankIcon{
+    font-size: 13px;
+    margin: 0 auto;
+}
+.RankDiv{
+    display: inline-flex;
+}
+.favor{
+    position: absolute;
+    top: -5%;
+    left: 91%;
+    font-size: 30px;
+}
+
+.fa-heart g g path{
+    stroke: white;
+    stroke-width: 10;
+  }
+  .red .fa-heart g g path{
+      color:red;
+  }
+  .CardStyle{
+    padding-bottom: 4px;
+    text-decoration: none;
+    margin: 8px;
+    margin-bottom: 3px;
+
+  }
+
+  .ulRests li{
+    font-size: 18px;
+    color: black;
+
+    list-style-type: none;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}

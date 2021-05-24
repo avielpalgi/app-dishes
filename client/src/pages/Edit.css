@@ -1,0 +1,23 @@
+
+.editDropClass{
+    width: 80%;
+    display: flex;
+    margin: 20px;
+}
+.DropDownClass{
+    border-radius: 8px;
+}
+
+.editDropClass > span{
+    margin: 15px;
+}
+form{
+    width: 80%;
+    display: inline-block;
+}
+.MainDiv{
+
+}
+form button{
+    margin: 10px;
+}

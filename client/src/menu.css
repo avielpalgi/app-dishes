@@ -1,0 +1,169 @@
+
+
+.responsive-toolbar {
+    z-index: 999;
+    background: #333333;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+    box-shadow: 2px 0px 2px #ccc;
+}
+
+.login {
+cursor: pointer;
+}
+    /* & ~ * {
+        padding-top: 60px;
+    } */
+
+    .responsive-toolbar ul {
+        background: #333333;
+        display: flex;
+        margin-block-start: 0;
+        margin-block-end: 0;
+        padding-inline-start: 0;
+        height: 100%;
+        align-items: center;
+        box-shadow: 2px 4px 2px 2px #ccc;
+
+    }
+    .responsive-toolbar .login{
+        position: fixed;
+        right: 5%;
+        top: 2.5%;
+        
+    }
+    .responsive-toolbar .logout{
+        position: fixed;
+        right: 90%;
+        top: 2.5%;
+        cursor: pointer;
+        
+    }
+    .responsive-toolbar figure {
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin-inline-start: 10px;
+            margin-inline-end: 0;
+            cursor: pointer;
+        }
+
+        .responsive-toolbar li {
+            list-style-type: none;
+            padding: 10px 20px;
+        }
+         #active {
+                background: #999;
+            }
+        
+
+            .responsive-toolbar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            /* flex-direction: row-reverse; */
+            align-items: center;
+        }
+
+        .responsive-toolbar i {
+            font-size: 20px;
+        }
+    
+
+
+    .responsive-toolbar ul {
+            height: 100%;
+            width: 250px;
+            right: -200px;
+            position: fixed;
+            top: 60px;
+            flex-direction: column;
+            transition: 300ms ease all;
+    }
+     #active {
+                right: 0;
+            }
+
+            .responsive-toolbar ul figure {
+                margin-inline-start: 2px;
+                position: fixed;
+                right: 10px;
+                top: 5px;
+                font-size: 30px;
+                color: #ccc;
+            }
+
+            .responsive-toolbar ul li {
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+            }
+/* 
+            .responsive-toolbar a {
+                flex-direction: row;
+                justify-content: space-between;
+                margin-left: 16px;
+                margin-right: 16px;
+            } */
+
+            @media only screen and (max-width: 600px) {
+                .responsive-toolbar ul .activeClass a{
+                    color: brown;
+                }
+                .notActiveClass a{
+                    color:rgb(119,119,119)
+                }
+                .responsive-toolbar{
+                    position: fixed;
+                    top: 92%;
+                    height: 60px;
+                }
+                .responsive-toolbar ul {
+                    direction: rtl;
+                    height: 100%;
+                    width: 100%;
+                    left: 0px;
+                    position: absolute;
+                    bottom: 100px;
+                    flex-direction: row;
+                    transition: 300ms ease all;
+                    top: 0px;
+                    background-color: rgb(169 232 136);
+            }
+            .responsive-toolbar ul li{
+                height: 100%;
+                width: 25%;
+            }
+            .responsive-toolbar i {
+                font-size: 14px;
+                /* padding-left: 5px; */
+            }
+            a .svg-inline--fa{
+                margin-left: 2px;
+            }
+            .responsive-toolbar ul li a{
+                display: grid;
+                font-size: 14px;
+                /* flex-direction: row; */
+            }
+            .responsive-toolbar ul li a .svg-inline--fa{
+                margin: 0 auto;
+            }
+    
+            .responsive-toolbar .login{
+                position: fixed;
+                right: 15%;
+                top: 2.5%;
+            }
+            .responsive-toolbar .logout{
+                position: fixed;
+                right: 80%;
+                top: 2.5%;
+                font-size: 14px;
+                cursor: pointer;
+                
+            }
+
+          
+              }
+           

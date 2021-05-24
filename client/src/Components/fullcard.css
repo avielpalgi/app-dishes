@@ -1,0 +1,56 @@
+.imageDish{
+    height: 240px;
+    width: 100%;
+}
+.header{
+    position: relative;
+}
+.dishName{
+    color: white;
+    background-color: rgb(190, 190, 190,0.6);
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* center the element */
+    right: 0;
+    left: 0;
+    margin: 0px;    
+}
+.title{
+    place-content: center;
+}
+.revDish{
+    text-align: right;
+}
+.revDish span{
+    margin: 10px;
+}
+.addRev .btn{
+    margin: 20px;
+}
+.diraction{
+    padding: 0;
+
+}
+.diraction svg{
+    font-size: 14px;
+}
+.links{
+    margin: 1px;
+    display: flex;
+    justify-content: center;
+}
+.links button{
+    margin: 1px;
+    width: 30px;
+}
+.links .svg-inline--fa{
+    width: 30px;
+    text-align: center;
+}
+.nameInput{
+    width: 60%;
+}
+.commentInput{
+    width: 80%;
+}
