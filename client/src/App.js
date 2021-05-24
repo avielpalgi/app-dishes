@@ -66,11 +66,13 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
   const [dishes, setDishes] = useState([])
   const [favorites, setFavorites] = useState([])
 
-
-  useEffect(() => {
-      fetch('/app/dish')
+const getData=()=>{
+  fetch('/app/dish')
          .then((data) => data.text())
          .then((res) => console.log(res));
+}
+  useEffect(() => {
+    getData();
     dispatchLoading();
     if (user.isLoggedIn) {
       GetUserFavorites();
