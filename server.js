@@ -8,7 +8,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const auth = require('./middleware/auth');
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 dotenv.config()
 
 mongoose.connect(process.env.DATABASE_ACCESS,{ 

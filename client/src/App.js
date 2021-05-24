@@ -68,7 +68,7 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
 
 
   useEffect(() => {
-    dispatchLoading();
+    //dispatchLoading();
     if (user.isLoggedIn) {
       GetUserFavorites();
     }
@@ -120,7 +120,7 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoadi
   }
 
   const getDistanceFromPosition = async (location) => {
-    dispatchLoading();
+    //dispatchLoading();
     let Temlocaiton = {
       latitude: location.lat,
       longitude: location.lng
