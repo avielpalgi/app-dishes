@@ -33,12 +33,9 @@ app.use('/app/protected', auth,(req,res)=>{
 });
 
 if(process.env.NODE_ENV === 'production'){
-    console.log("im here");
     app.use(express.static(path.join(__dirname, 'client/build')));
-    app.get("*",(req,res)=>{
-    console.log("im here2");
-    console.log('res1',res);
-    res.sendFile(path.resolve(__dirname,'./client','build','index.html'))
+    app.get("/",(req,res)=>{
+    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
 })
 }
 else{
