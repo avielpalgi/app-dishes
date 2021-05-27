@@ -213,6 +213,9 @@ router.get('/users/logout',(req,res,next)=>{
 
 router.post('/users/register',userController.register); //Register Controller
 router.post('/users/login',userController.login);  //Login Controller
+router.post('/users/facebookLogin',userController.facebookLogin);  //Login Controller
+router.post('/users/googleLogin',userController.googleLogin);  //Login Controller
+
 
 router.post('/favorites/:userId',userController.AddtoFavorite)
 

@@ -57,14 +57,14 @@ const DishCard = (props) => {
 
     const addToFavorite = (dish) => {
         if (props.addToFavorite) {
-            console.log("add dish",dish);
+            console.log("add dish", dish);
             props.addToFavorite(dish);
         }
         if (props.removeFromFavorite) {
-            console.log("remove dish",dish);
+            console.log("remove dish", dish);
             props.removeFromFavorite(dish);
         }
-       
+
     }
 
     const removeFromFavorite = (dish) => {
@@ -74,32 +74,33 @@ const DishCard = (props) => {
 
 
     return (
-        <div className="card">
-            <div className="card-header">
-                <img className="card-img-top" src={dish.Images.Normal.url} alt={dish.Name} />
-                <span className={classFavor} onClick={() => { addToFavorite(dish) }}><i class="fas fa-heart fa-inverse" data-fa-transform="shrink-8 fa-border"></i></span>
-                <p className="dishName card-title">{dish.Name}</p>
-            </div>
-            <div class="card-body">
-                <div className="divDetails">
-                    <div className="row">
-                        <div className="col-8 rightSide">
-                            <p className="restType">סוג מנה: {dish.Type}</p>
-                            <p className="restName">מסעדה: {dish.Restaurant.Name}</p>
-                            <p className="restAddress">כתובת: {dish.Restaurant.Address}</p>
-                            <Link to={{pathname:"/fulldishcard", state:{dish:dish}}}><p className="DishDetails">לחץ לפרטים נוספים</p></Link>
-                        </div>
-                        <div className="col-4 leftSide">
-                            <p className="restDistance">{dish.Restaurant.distance} ק"מ ממך</p>
-                            <div className="RankDiv" style={{ color: getColorForPercentage(dish.AvgRank / 5) }}>
-                                <span className="rankIcon"><FontAwesomeIcon icon={faStar} /></span>
-                                <span className="restRank">{dish.AvgRank}</span>
+        <div className="col-xs-12 col-sm-6 col-lg-4 divcard">
+            <div className="card">
+                <div className="card-header">
+                    <img className="card-img-top" src={dish.Images.Normal.url} alt={dish.Name} />
+                    <span className={classFavor} onClick={() => { addToFavorite(dish) }}><i class="fas fa-heart fa-inverse" data-fa-transform="shrink-8 fa-border"></i></span>
+                    <p className="dishName card-title">{dish.Name}</p>
+                </div>
+                <div class="card-body">
+                    <div className="divDetails row">
+                            <div className="col-8 rightSide">
+                                <p className="restType">סוג מנה: {dish.Type}</p>
+                                <p className="restName">מסעדה: {dish.Restaurant.Name}</p>
+                                <p className="restAddress">כתובת: {dish.Restaurant.Address}</p>
+                                <Link to={{ pathname: "/fulldishcard", state: { dish: dish } }}><p className="DishDetails">לחץ לפרטים נוספים</p></Link>
                             </div>
-                        </div>
+                            <div className="col-4 leftSide">
+                                <p className="restDistance">{dish.Restaurant.distance} ק"מ</p>
+                                <div className="RankDiv" style={{ color: getColorForPercentage(parseFloat(dish.AvgRank).toFixed(1) / 5) }}>
+                                    <span className="rankIcon"><FontAwesomeIcon icon={faStar} /></span>
+                                    <span className="restRank">{parseFloat(dish.AvgRank).toFixed(1)}</span>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
+
     )
 }
 

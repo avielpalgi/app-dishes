@@ -9,10 +9,30 @@
 h1{
     margin:8%;
 }
+.chooseOrder{
+    margin: 5%;
+}
+@media only screen and (max-width: 600px) {
+    .chooseOrder{
+        margin: 0;
+    }
+    .listDishes{
+        text-align: -webkit-center;
+        margin: 0;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .divcard{
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
 
 .listDishes{
     text-align: -webkit-center;
+    margin: 3%;
 }
+
 .divImage{
     position: relative;
     height: 150px;

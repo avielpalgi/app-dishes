@@ -7,7 +7,8 @@ const User = require('../models/User');
 
 module.exports = {
     index: async (req, res, next) => {
-        const dish = await Dish.find({}).populate('Reviews').populate('Restaurant');
+        const dish = await Dish.find({}).populate({ path: 'Reviews', model: 'review', populate: { path: 'UserID', model: 'user' } }).populate('Restaurant');
+       
         let sum = 0;
         let temp = [];
         for (let i = 0; i < dish.length; i++) {
@@ -26,7 +27,7 @@ module.exports = {
     },
     getDish: async (req, res, next) => {
         const { dishId } = req.params;
-        const dish = await Dish.findById(dishId).populate('Reviews');
+        const dish = await Dish.findById(dishId).populate('Reviews').populate('User');
         res.status(200).json(dish);
     },
     updateDish: async (req, res, next) => {
@@ -37,7 +38,7 @@ module.exports = {
     },
     getDishReviews: async (req, res, next) => {
         const { dishId } = req.params;
-        const dish = await Dish.findById(dishId).populate('Reviews');
+        const dish = await (await Dish.findById(dishId).populate('Reviews').populate('User'));
         res.status(200).json(dish.Reviews);
     },
     newDishReview: async (req, res, next) => {
@@ -49,11 +50,10 @@ module.exports = {
             await newReview.save();
             dish.Reviews.push(newReview);
             await dish.save();
-            res.status(200).json(newReview);
+            res.status(200).json(dish.Reviews.populate('Reviews').populate('User'));
         } catch (error) {
             error.status = 400;
             next(error);
         }
-
     }
 };
