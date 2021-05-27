@@ -54,3 +54,49 @@
 .commentInput{
     width: 80%;
 }
+
+#profileImage {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #512DA8;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    margin: 20px 0;
+  }
+  .listRev{
+      margin: 15px;
+      padding-right: 0px;
+  }
+  .detailsRev{
+      margin-top: 3%;
+      text-align: right;
+  }
+  .detailsRev p{
+      margin: 1px;
+  }
+  .dateRev{ 
+      font-size: 12px;
+    display: block;
+    direction: ltr;
+    margin-right: 10px;
+}
+ 
+  .NameRev{
+      font-weight: 600;
+      font-size: 18px;
+  }
+  .DateAndRank{
+    display: flex;
+  }
+  .picDivRev img{
+      height: 40px;
+      width: 40px;
+      margin: 20px 0;
+      border-radius: 50%;
+
+  }
+
+  

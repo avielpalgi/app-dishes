@@ -18,6 +18,7 @@ function ResponsiveNavigation({ background, hoverBackground, linkColor, navLinks
             history.push("/login");
         }
     }
+
     useEffect(() => {
         hadleNavOpen(navOpen);
     }, [navOpen])

@@ -3,13 +3,20 @@ import { faStar, faDirections, faMapMarkerAlt, faPhoneAlt, faLink } from "@forta
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './fullcard.css';
 import Rating from 'react-rating'
+import ReactTimeAgo from 'react-time-ago'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+TimeAgo.addDefaultLocale(en)
+
 const FullDishCard = (props) => {
     const [dish, setDish] = useState(props.location.state.dish)
+    const [reviews, setReviews] = useState(props.location.state.dish.Reviews)
     const [rating, setRating] = useState(0)
     const [comment, setComment] = useState("")
     const [name, setName] = useState("")
     const [reviewOpen, setReviewOpen] = useState(false)
     useEffect(() => {
+        console.log(reviews);
         // if (props.location.state) {
         //     setDish(props.location.state.dish)
         // }
@@ -20,7 +27,7 @@ const FullDishCard = (props) => {
         console.log("name", name);
         console.log("comment", comment);
         console.log("rating", rating);
-        console.log("user",props.user.userId);
+        console.log("user", props.user.userId);
         const Review = {
             Name: name,
             Rank: rating,
@@ -29,33 +36,34 @@ const FullDishCard = (props) => {
         }
         console.log(Review);
         console.log(dish._id);
-        // if (props.user.userId) {
-        //     fetch('/app/dish/' + dish._id + '/reviews', {
-        //         method: "POST",
-        //         body: JSON.stringify(Review),
-        //         headers: new Headers({
-        //             "Content-Type": "application/json; charset=UTF-8",
-        //         })
-        //     })
-        //         .then((res) => {
-        //             return res.json();
-        //         })
-        //         .then(
-        //             (result) => {
-        //                 console.log('resReview', result);
-        //                 setTimeout(() => {
-        //                     props.dispatchLoading();
-        //                 }, 800);
-        //             },
+        if (props.user.userId) {
+            fetch('/app/dish/' + dish._id + '/reviews', {
+                method: "POST",
+                body: JSON.stringify(Review),
+                headers: new Headers({
+                    "Content-Type": "application/json; charset=UTF-8",
+                })
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then(
+                    (result) => {
+                        console.log('resReview', result);
+                        // setReviews(result)
+                        setTimeout(() => {
+                            props.dispatchLoading();
+                        }, 800);
+                    },
 
-        //             (error) => {
-        //                 console.log("err post=", error);
-        //             }
-        //         )
-        // }
-        // else {
-        //     console.log("אתה צריך להירשם");
-        // }
+                    (error) => {
+                        console.log("err post=", error);
+                    }
+                )
+        }
+        else {
+            console.log("אתה צריך להירשם");
+        }
     }
 
     const directToGoogleMap = () => {
@@ -105,10 +113,10 @@ const FullDishCard = (props) => {
                             {dish.Restaurant.Phone ? <p className="restAddress">טלפון: {dish.Restaurant.Phone}</p> : null}
                         </div>
                         <div className="col-4 leftSide">
-                            <p className="restDistance">{dish.Restaurant.distance} ק"מ ממך</p>
-                            <div className="RankDiv" style={{ color: getColorForPercentage(dish.AvgRank / 5) }}>
+                            <p className="restDistance">{dish.Restaurant.distance} ק"מ</p>
+                            <div className="RankDiv" style={{ color: getColorForPercentage(parseFloat(dish.AvgRank).toFixed(1) / 5) }}>
                                 <span className="rankIcon"><FontAwesomeIcon icon={faStar} /></span>
-                                <span className="restRank">{dish.AvgRank}</span>
+                                <span className="restRank">{parseFloat(dish.AvgRank).toFixed(1)}</span>
                             </div>
                             <div className="col links">
                                 <button className="diraction btn btn-primary"><FontAwesomeIcon icon={faLink} /></button>
@@ -118,11 +126,33 @@ const FullDishCard = (props) => {
                         </div>
                     </div>
                     <div className="title"><h2>ביקורות: </h2></div>
-                    {dish.Reviews ? dish.Reviews.map((rev, key) =>
-                        <div className="revDish">
-                            <span>{rev.Comment}</span>
-                            <span>{rev.Rank}</span>
-                        </div>) : null}
+                    <ul className="list-group listRev">
+                        {reviews ? reviews.map((rev, key) =>
+                            <li id={key} className="list-group-item">
+                                <div className="row">
+                                    <div className="col-2 picDivRev">
+                                        {rev.UserID ? rev.UserID.Picture ? <div><img src={rev.UserID.Picture} /></div> : <div id="profileImage">{rev.UserID.FirstName.charAt(0) + rev.UserID.LastName.charAt(0)}</div> : null}
+                                    </div>
+                                    <div className="col-10 detailsRev">
+                                        <div className="NameRev">{rev.Name ? <p>{rev.Name}</p> : <p>אנונימי</p>}</div>
+                                        <div className="DateAndRank">
+                                            <span>
+                                            <Rating style={{ color: getColorForPercentage(rev.Rank / 5) }} emptySymbol={<FontAwesomeIcon icon={["far", "star"]} />} fullSymbol={<FontAwesomeIcon icon={["fa", "star"]} />} {...props} initialRating={rev.Rank} fractions={2} />
+                                            </span>
+                                            <span>
+                                            <ReactTimeAgo className="dateRev" date={rev.CommentedAt} locale="en-US" />
+                                            </span>
+                                                
+                                        </div>
+
+
+                                        <p>{rev.Comment}</p>
+                                    </div>
+                                </div>
+
+                            </li>
+                        ) : null}
+                    </ul>
                     <div className="addRev">
                         <button onClick={() => { setReviewOpen(!reviewOpen) }} className="btn btn-primary">הוסף ביקורת</button>
                         {reviewOpen ?
@@ -132,7 +162,7 @@ const FullDishCard = (props) => {
                                 />
                                 <div className="col-xs-12 form-group nameInput">
                                     <label>שם:(לא חובה)</label>
-                                    <input value={name} onChange={(e) => setName(e.target.value)} className="form-control" type="text" />
+                                    <input placeholder={props.user ? props.user.fullName : null} value={name} onChange={(e) => setName(e.target.value)} className="form-control" type="text" />
                                 </div>
                                 <div className="col-xs-12 form-group">
                                     <label>הערה:</label>

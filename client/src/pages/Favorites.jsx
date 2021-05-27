@@ -42,7 +42,7 @@ const Favorites = (props) => {
 
     const sortByRank = async () => {
         let tempList = dishes;
-        tempList.sort((a, b) => a.AvgRank - b.AvgRank)
+        tempList.sort((a, b) => a.AvgRank - b.AvgRank).reverse();
         console.log('tempList', tempList);
         setDishes([...tempList]);
         console.log("state", dishes);
@@ -88,7 +88,7 @@ const removeFromFavorite = (dish) => {
     props.dispatchLoading();
     console.log("HomePage remove", dish);
     if (props.user.userId) {
-        fetch(apiUrl + '/app/favorites/' + props.user.userId + '/del', {
+        fetch('/app/favorites/' + props.user.userId + '/del', {
             method: "POST",
             body: JSON.stringify(dish),
             headers: new Headers({

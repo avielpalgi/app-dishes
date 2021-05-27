@@ -29,6 +29,9 @@ const User = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    Picture:{
+        type:String
+    },
     Favorites:[{
         type:mongoose.Schema.Types.ObjectId,ref:'dish'
     }]
