@@ -38,7 +38,7 @@ if(process.env.NODE_ENV === 'production'){
     app.get("*",(req,res)=>{
     console.log("im here2");
     console.log('res1',res);
-    res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+    res.sendFile(path.resolve(__dirname,'./client','build','index.html'))
 })
 }
 else{
