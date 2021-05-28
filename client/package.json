@@ -1,5 +1,5 @@
 {
-  "name": "rest",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -35,12 +35,15 @@
     "react-dropdown-now": "^5.0.0",
     "react-facebook-login": "^4.1.1",
     "react-file-base64": "^1.0.3",
+    "react-geocode": "^0.2.3",
     "react-google-login": "^5.2.2",
     "react-icons": "^4.2.0",
+    "react-rating": "^2.0.5",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^2.1.8",
     "react-search-autocomplete": "^5.2.2",
+    "react-time-ago": "^6.2.2",
     "react-toastify": "^7.0.4",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
@@ -72,5 +75,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4000/"
+  "proxy": "http://localhost:5000"
 }

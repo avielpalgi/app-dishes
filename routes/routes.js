@@ -213,10 +213,19 @@ router.get('/users/logout',(req,res,next)=>{
 
 router.post('/users/register',userController.register); //Register Controller
 router.post('/users/login',userController.login);  //Login Controller
+<<<<<<< HEAD
+router.post('/users/facebookLogin',userController.facebookLogin) // Login with Facebook
+router.post('/users/googleLogin',userController.googleLogin) // Login with Google
+=======
+router.post('/users/facebookLogin',userController.facebookLogin);  //Login Controller
+router.post('/users/googleLogin',userController.googleLogin);  //Login Controller
+
+>>>>>>> masterbranch
 
 router.post('/favorites/:userId',userController.AddtoFavorite)
 
 router.get('/favorites/:userId',userController.GetUserFavorites);
+router.post('/favorites/:userId/del',userController.DeleteFavorite);
 
 // router.get('/restaurants/getAll',restaurantController.getAll); //Get All Restaurants
 // router.post('/restaurants/addNew',restaurantController.addNew); //Add new Restaurant

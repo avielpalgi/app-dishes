@@ -136,15 +136,18 @@ cursor: pointer;
             }
             .responsive-toolbar i {
                 font-size: 14px;
-                padding-left: 5px;
+                /* padding-left: 5px; */
             }
             a .svg-inline--fa{
                 margin-left: 2px;
             }
             .responsive-toolbar ul li a{
-                display: block;
+                display: grid;
                 font-size: 14px;
-                flex-direction: row;
+                /* flex-direction: row; */
+            }
+            .responsive-toolbar ul li a .svg-inline--fa{
+                margin: 0 auto;
             }
     
             .responsive-toolbar .login{

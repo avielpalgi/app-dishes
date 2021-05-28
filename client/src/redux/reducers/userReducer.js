@@ -5,6 +5,7 @@ const defaultState = {
     userId:null,
     fullName:null,
     token:null,
+    picture:null,
     isLoggedIn:false
 };
 

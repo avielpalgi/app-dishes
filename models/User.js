@@ -25,9 +25,15 @@ const User = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    Picture:{
+        type:String
+    },
     isDeleted: {
         type: Boolean,
         default: false
+    },
+    Picture:{
+        type:String
     },
     Favorites:[{
         type:mongoose.Schema.Types.ObjectId,ref:'dish'
@@ -35,7 +41,7 @@ const User = new mongoose.Schema({
 
 });
 User.methods.generateHash = function (password) {
-    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
 };
 
 
@@ -47,7 +53,7 @@ function emailValidator(value) {
 User.pre('save',async function(next){
     try {
         const salt = await bcrypt.genSalt(10);
-        const passwordHash = await bcrypt.hash(this.Password, salt)
+        const passwordHash = await bcrypt.hash(this.Password, 10)
         this.Password = passwordHash;
         next();
     } catch (error) {

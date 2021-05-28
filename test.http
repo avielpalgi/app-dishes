@@ -1,0 +1,157 @@
+# GET http://localhost:4000/app/users
+
+# POST http://localhost:4000/app/restaurant
+# Content-Type: application/json
+
+# {
+#      "Name":"לימוזין",
+#         "area":"הגליל התחתון והעמקים",
+#         "location":{
+#             "lat":32.708918,
+#             "lng":35.173548
+#         },
+#         "City":"רמת ישי",
+#         "Website":"#",
+#         "Phone":"",
+#         "Address":"חורש האלונים 14, רמת ישי",
+#         "Type":"בשר",
+#      "Images":
+#                     {
+#                            "Small":{
+#                                "url":"",
+#                                "width":"",
+#                                "height":""
+#                            },
+#                            "Normal":{
+#                             "url":"",
+#                             "width":"",
+#                             "height":""
+#                            },
+#                            "Large":{
+#                             "url":"",
+#                             "width":"",
+#                             "height":""
+#                            }
+#                        }
+# }
+
+# GET http://localhost:4000/app/restaurant/60a4ccc01e234e2eb450fa24
+
+
+# PUT http://localhost:4000/app/restaurant/60a4ccc01e234e2eb450fa24
+# Content-Type: application/json
+
+# {
+#     "Name":"RestChangeName",
+#     "location":{
+#         "lat":3.6,
+#         "lng":4.4
+#     },
+#     "City":"New York",
+#     "area":"USA",
+#     "Website":"",
+#     "Phone":"",
+#     "Address":"Address ",
+#     "Type":"MEAT"
+# }
+
+# GET http://localhost:4000/app/restaurant/60a4ccc01e234e2eb450fa24/dishes
+
+# POST http://localhost:4000/app/restaurant/60a4f6eae03f1c520ca535eb/dishes
+# Content-Type: application/json
+
+
+#    {
+#                 "Name":"שניצל עגל וינאי",
+#                 "Type":"בשר",
+#                 "Tags":["שניצל","עגל","בקר"],
+#                 "info":"",
+#                 "Price":88,
+#                 "Images":
+#                             {
+#                                 "Small":{
+#                                     "url":"",
+#                                     "width":"",
+#                                     "height":""
+#                                 },
+#                                 "Normal":{
+#                                  "url":"",
+#                                  "width":"",
+#                                  "height":""
+#                                 },
+#                                 "Large":{
+#                                  "url":"",
+#                                  "width":"",
+#                                  "height":""
+#                                 }
+#                              }
+# }
+
+
+# GET http://localhost:4000/app/dish
+
+# GET http://localhost:4000/app/dish/60a4d0286086cf0a046bd8c4
+
+# PUT http://localhost:4000/app/dish/60a4d0286086cf0a046bd8c4
+# Content-Type: application/json
+
+#        {
+#     "Name":"שווארמה בפיתה",
+#     "Type":"שווארמה",
+#     "Tags":["Shawarma","שווארמה","פיתה"],
+#     "Price":33,
+#     "Images":
+#       {
+#         "Small":{
+#             "url":"ddd",
+#             "width":32,
+#             "height":10
+#             },
+#         "Normal":{
+#             "url":"ccc",
+#             "width":50,
+#             "height":11
+#             },
+#         "Large":{
+#             "url":"sdfsd",
+#             "width":20,
+#             "height":400
+#             }
+#         }
+# }
+
+# GET http://localhost:4000/app/dish/60a5436b8fae0b0c2c531977/reviews
+
+
+POST http://localhost:4000/app/dish/60a5434a8fae0b0c2c531975/reviews
+Content-Type: application/json
+
+ {
+     
+"Comment": "פלגי אביאל",
+"Name": "אביאל",
+"Rank": 3,
+"UserID": "60aa850939342b431c8932e5"
+}
+
+
+
+
+# POST http://localhost:4000/app/users/register
+# Content-Type: application/json
+
+# {
+#     "FirstName":"Aviel",
+#     "LastName":"Palgi",
+#     "Email":"avielpalgi@gmail.com",
+#     "Password":"avielpalgi"
+# }
+
+
+# POST http://localhost:4000/app/users/login
+# Content-Type: application/json
+
+# {
+#     "Email":"avielpalgi@gmail.com",
+#     "Password":"avielpalgi"
+# }

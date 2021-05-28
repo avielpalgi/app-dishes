@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import "./home.css";
-import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DishCard from '../Components/DishCard';
 
 function Home(props) {
     const [, updateState] = React.useState();
     const forceUpdate = useCallback(() => updateState({}), []);
-    const apiUrl = 'https://my-app-dishes.herokuapp.com';
+    const apiUrl = 'http://localhost:4000';
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
     const [dishes, setDishes] = useState([]);
     const [classFavorite, setclassFavorite] = useState("favor")
@@ -25,6 +23,10 @@ function Home(props) {
     }, [favorites])
 
     useEffect(() => {
+        setFavorites(props.favorites)
+    }, [props.favorites])
+
+    useEffect(() => {
         setDishes(props.dishes);
     }, [props.dishes])
 
@@ -38,7 +40,7 @@ function Home(props) {
 
     const sortByRank = async () => {
         let tempList = dishes;
-        tempList.sort((a, b) => a.AvgRank - b.AvgRank)
+        tempList.sort((a, b) => a.AvgRank - b.AvgRank).reverse();
         console.log('tempList', tempList);
         setDishes([...tempList]);
         console.log("state", dishes);
@@ -87,32 +89,72 @@ function Home(props) {
         }
     }
     const addToFavorite = (dish) => {
-        console.log(dish);
-        fetch(apiUrl + '/app/favorites/' + props.user.userId, {
-            method: "POST",
-            body: JSON.stringify(dish),
-            headers: new Headers({
-                "Content-Type": "application/json; charset=UTF-8",
+        props.dispatchLoading();
+        console.log("HomePage", dish);
+        console.log('userId', props.user.userId);
+        if (props.user.userId) {
+            fetch('/app/favorites/' + props.user.userId, {
+                method: "POST",
+                body: JSON.stringify(dish),
+                headers: new Headers({
+                    "Content-Type": "application/json; charset=UTF-8",
+                })
             })
-        })
-            .then((res) => {
-                return res.json();
-            })
-            .then(
-                (result) => {
-                    console.log('res', result);
-                    setFavorites(result.Favorites);
-                },
+                .then((res) => {
+                    return res.json();
+                })
+                .then(
+                    (result) => {
+                        console.log('res', result);
+                        props.GetUserFavorites();
+                        setTimeout(() => {
+                            props.dispatchLoading();
+                        }, 800);
+                    },
 
-                (error) => {
-                    console.log("err post=", error);
-                }
-            )
+                    (error) => {
+                        console.log("err post=", error);
+                    }
+                )
+        }
+        else {
+            console.log("אתה צריך להירשם");
+        }
+
     }
 
     const removeFromFavorite = (dish) => {
-        console.log('remove', dish);
+        props.dispatchLoading();
+        console.log("HomePage remove", dish);
+        if (props.user.userId) {
+            fetch('/app/favorites/' + props.user.userId + '/del', {
+                method: "POST",
+                body: JSON.stringify(dish),
+                headers: new Headers({
+                    "Content-Type": "application/json; charset=UTF-8",
+                })
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then(
+                    (result) => {
+                        console.log('res', result);
+                        props.GetUserFavorites();
+                        setTimeout(() => {
+                            props.dispatchLoading();
+                        }, 800);
+                        // setFavorites(result.Favorites);
+                    },
 
+                    (error) => {
+                        console.log("err post=", error);
+                    }
+                )
+        }
+        else {
+            console.log("אתה צריך להירשם");
+        }
     }
 
     return (
@@ -122,19 +164,19 @@ function Home(props) {
                 <p>סדר לפי: </p>
                 <div className="row">
                     <div className="col-6 ButtonClass">
-                    <button className="btn btn-secondary" onClick={() => { sortByDistance() }}>קרוב אליי</button>
+                        <button className="btn btn-secondary" onClick={() => { sortByDistance() }}>קרוב אליי</button>
 
                     </div>
                     <div className="col-6 ButtonClass">
-                    <button className="btn btn-secondary" onClick={() => { sortByRank() }}>דירוג</button>
+                        <button className="btn btn-secondary" onClick={() => { sortByRank() }}>דירוג</button>
                     </div>
                 </div>
             </div>
             {dishes.length > 0 ?
-                <div className="listDishes">
-                   {dishes.map((dish, key) =>
-                    props.favorites.some(f=> f.Name === dish.Name) ?
-                    <DishCard favor={true} dish={dish}/> : <DishCard favor={false} dish={dish}/>
+                <div className="listDishes row">
+                    {dishes.map((dish, key) =>
+                        props.favorites.some(f => f.Name === dish.Name) ?
+                            <DishCard removeFromFavorite={removeFromFavorite} favor={true} dish={dish} /> : <DishCard addToFavorite={addToFavorite} favor={false} dish={dish} />
                     )}
                 </div>
                 : null}

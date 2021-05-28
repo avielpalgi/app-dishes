@@ -17,7 +17,7 @@ import { connect } from 'react-redux'
 import { Switch, Route, Redirect, withRouter } from 'react-router-dom'
 import Spinner from './spinner/spinner';
 import { ToastContainer, Slide } from 'react-toastify';
-import { logoutUser,loading } from './redux/actions/authActionCreators';
+import { logoutUser, loading } from './redux/actions/authActionCreators';
 import { SearchPage } from './pages/SearchPage';
 import { axios } from 'axios';
 import Edit from './pages/Edit';
@@ -25,6 +25,7 @@ import { changeNav } from './redux/actions/navbarAction';
 import User from './pages/User';
 import { getDistance } from 'geolib';
 import Favorites from './pages/Favorites';
+import FullDishCard from './Components/FullDishCard';
 
 
 const navLinks = [
@@ -52,7 +53,7 @@ const navLinks = [
 ]
 
 
-function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoading }) {
+function App({ user, dispatchLogoutAction, dispatchNavbar, navbar, dispatchLoading }) {
   const apiUrl = '';
   const [isLoading, setIsLoading] = useState(false);
   const [windowHeight, setWindowHeight] = useState(window.innerHeight)
@@ -64,8 +65,7 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
   const [restaurants, setRestaurants] = useState([])
   const [dishes, setDishes] = useState([])
   const [favorites, setFavorites] = useState([])
-
-
+ 
   useEffect(() => {
     dispatchLoading();
     if (user.isLoggedIn) {
@@ -85,6 +85,7 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
       })
     })
       .then((res) => {
@@ -147,26 +148,28 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
   }
 
   const GetUserFavorites = () => {
+    console.log("here");
     fetch('/app/favorites/' + user.userId, {
-        method: "GET",
-        headers: new Headers({
-            "Content-Type": "application/json; charset=UTF-8",
-        })
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        'Accept': 'application/json'
+      })
     })
-        .then((res) => {
-            return res.json();
-        })
-        .then(
-            (result) => {
-                console.log('res', result);
-                setFavorites(result.Favorites);
-            },
+      .then((res) => {
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log('res', result);
+          setFavorites(result.Favorites);
+        },
 
-            (error) => {
-                console.log("err post=", error);
-            }
-        )
-}
+        (error) => {
+          console.log("err post=", error);
+        }
+      )
+  }
 
 
 
@@ -208,11 +211,12 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
           !user.isLoggedIn ?
             (
               <Switch>
-                <Route render={(props)=>(<Favorites favorites={favorites} {...props}/>)} path="/favorites" />
+                <Route render={(props) => (<FullDishCard dispatchLoading={dispatchLoading}  user={user} {...props}  />)} path="/fulldishcard" />
+                <Route render={(props) => (<Favorites dispatchLoading={dispatchLoading} GetUserFavorites={GetUserFavorites} user={user} favorites={favorites} dishes={dishes} {...props} />)} path="/favorites" />
                 <Route component={Login} exact path="/login" windowHeight={windowHeight} />
                 <Route component={Register} path="/register" windowHeight={windowHeight} />
                 <Route component={Reset} path="/reset" />
-                <Route render={(props) => (<Home favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
+                <Route render={(props) => (<Home favorites={favorites} dispatchLoading={dispatchLoading} GetUserFavorites={GetUserFavorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
                 <Route component={User} path="/user" />
                 <Route component={Map} path="/map" />
                 <Route render={(props) => (<SearchPage myLat={myLat} myLng={myLng} {...props} />)} path="/search" />
@@ -221,9 +225,10 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
             )
             : (
               <Switch>
-                <Route render={(props) => (<Home favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
+                <Route render={(props) => (<FullDishCard dispatchLoading={dispatchLoading} user={user} {...props}  />)} path="/fulldishcard" />
+                <Route render={(props) => (<Home GetUserFavorites={GetUserFavorites} dispatchLoading={dispatchLoading} favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
                 <Route component={User} path="/user" />
-                <Route render={(props)=>(<Favorites favorites={favorites} {...props}/>)} path="/favorites" />
+                <Route render={(props) => (<Favorites user={user} dishes={dishes} GetUserFavorites={GetUserFavorites} dispatchLoading={dispatchLoading} favorites={favorites} {...props} />)} path="/favorites" />
                 <Route component={Map} path="/map" />
                 <Route component={Edit} path="/edit" />
                 <Route render={(props) => (<SearchPage myLat={myLat} myLng={myLng} {...props} />)} path="/search" />
@@ -237,11 +242,12 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
           !user.isLoggedIn ?
             (
               <Switch>
+                <Route render={(props) => (<FullDishCard dispatchLoading={dispatchLoading} user={user} {...props}  />)} path="/fulldishcard" />
                 <Route component={Login} exact path="/login" windowHeight={windowHeight} />
                 <Route component={Register} path="/register" windowHeight={windowHeight} />
                 <Route component={Reset} path="/reset" />
-                <Route render={(props)=>(<Favorites favorites={favorites} {...props}/>)} path="/favorites" />
-                <Route render={(props) => (<Home favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
+                <Route render={(props) => (<Favorites user={user} dishes={dishes} dispatchLoading={dispatchLoading} GetUserFavorites={GetUserFavorites} favorites={favorites} {...props} />)} path="/favorites" />
+                <Route render={(props) => (<Home dispatchLoading={dispatchLoading} GetUserFavorites={GetUserFavorites} favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
                 <Route component={User} path="/user" />
                 <Route component={Map} path="/map" />
                 <Route render={(props) => (<SearchPage myLat={myLat} myLng={myLng} {...props} />)} path="/search" />
@@ -249,13 +255,14 @@ function App({ user, dispatchLogoutAction, dispatchNavbar, navbar,dispatchLoadin
               </Switch>
             ) :
             <Switch>
-              <Route render={(props) => (<Home favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
+                <Route render={(props) => (<FullDishCard dispatchLoading={dispatchLoading} user={user} {...props}  />)} path="/fulldishcard" />
+              <Route render={(props) => (<Home dispatchLoading={dispatchLoading} GetUserFavorites={GetUserFavorites} favorites={favorites} user={user} dishes={dishes}{...props} />)} exact path="/" />
               <Route component={User} path="/user" />
               <Route component={Map} path="/map" />
-              <Route render={(props)=>(<Favorites favorites={favorites} {...props}/>)} path="/favorites" />
+              <Route render={(props) => (<Favorites user={user} dishes={dishes} dispatchLoading={dispatchLoading} GetUserFavorites={GetUserFavorites} favorites={favorites} {...props} />)} path="/favorites" />
               <Route render={(props) => (<SearchPage myLat={myLat} myLng={myLng} {...props} />)} path="/search" />
               <Route component={Edit} path="/edit" />
-              <Redirect to="/" />
+              {/* <Redirect to="/" /> */}
             </Switch>
 
         }
@@ -271,8 +278,8 @@ const mapStateToProps = (state) => ({
   navbar: state.navbar
 });
 const mapDispatchToProps = (dispatch) => ({
-  dispatchLoading:()=>dispatch(loading()),
-    dispatchLogoutAction: () => dispatch(logoutUser()),
+  dispatchLoading: () => dispatch(loading()),
+  dispatchLogoutAction: () => dispatch(logoutUser()),
   dispatchNavbar: (navOpen, onSuccess, onError) =>
     dispatch(changeNav(navOpen, onSuccess, onError))
 });

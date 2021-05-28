@@ -13,6 +13,30 @@ export const registerUser = (data, onSuccess, onError) => ({
     }
 });
 
+export const FacebookLogin = (data, onSuccess, onError) => ({
+    type: constants.API,
+    payload: {
+        method: 'POST',
+        url: '/app/users/facebookLogin',
+        data,
+        success: (response) => (setUserInfo(response)),
+        postProcessSuccess: onSuccess,
+        postProcessError: onError
+    }
+});
+
+export const GoogleLoginUser = (data, onSuccess, onError) => ({
+    type: constants.API,
+    payload: {
+        method: 'POST',
+        url: '/app/users/googleLogin',
+        data,
+        success: (response) => (setUserInfo(response)),
+        postProcessSuccess: onSuccess,
+        postProcessError: onError
+    }
+});
+
 export const loginUser = (data,onSuccess,onError)=>({
     type: constants.API,
     payload:{
@@ -41,13 +65,29 @@ export const loading = (obj) =>{
 
 const setUserInfo = (data) =>{
     const parsedToken = JSON.parse(atob(data.token.split('.')[1]))
-    const userInfo = {
-        userId: parsedToken.id,
-        fullName: `${parsedToken.FirstName} ${parsedToken.LastName}`,
-        token:data.token,
-        isLoggedIn:true
-    };
+    if (parsedToken.Picture) {
+        const userInfo = {
+            userId: parsedToken.id,
+            fullName: `${parsedToken.FirstName} ${parsedToken.LastName}`,
+            token:data.token,
+            isLoggedIn:true,
+            picture:parsedToken.Picture
+        };
+        setInStorage('USER_INFO',JSON.stringify(userInfo));
+        return{type: constants.SET_USER_INFO, payload:userInfo}
+    }
+    else{
+        const userInfo = {
+            userId: parsedToken.id,
+            fullName: `${parsedToken.FirstName} ${parsedToken.LastName}`,
+            token:data.token,
+            isLoggedIn:true
+        };
+        setInStorage('USER_INFO',JSON.stringify(userInfo));
+        return{type: constants.SET_USER_INFO, payload:userInfo}
+    }
+    
 
-    setInStorage('USER_INFO',JSON.stringify(userInfo));
-    return{type: constants.SET_USER_INFO, payload:userInfo}
+    // setInStorage('USER_INFO',JSON.stringify(userInfo));
+    // return{type: constants.SET_USER_INFO, payload:userInfo}
 };

@@ -149,6 +149,7 @@ function Register({ windowHeight, dispatchRegisterAction }) {
     </Container>
   )
 }
+
 const mapDispatchToProps = dispatch => ({
   dispatchRegisterAction: (FirstName, LastName, Email, Password, onSuccess, onError) =>
     dispatch(registerUser({ FirstName, LastName, Email, Password }, onSuccess, onError))

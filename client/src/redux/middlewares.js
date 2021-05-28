@@ -6,7 +6,7 @@ export const apiMiddleware = ({ dispatch, getState }) => next => action => {
 
     if (action.type !== constants.API) return next(action);
     dispatch({type:constants.TOGGLE_LOADER});
-    const BASE_URL = 'https://my-app-dishes.herokuapp.com';
+    const BASE_URL = '';
 
     const { url, method, success, data, postProcessSuccess, postProcessError } = action.payload
 

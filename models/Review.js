@@ -10,6 +10,10 @@ const reviewSChema = new mongoose.Schema({
         type:String,
         required:false
     },
+    Name:{
+        type:String,
+        required:false
+    },
     CommentedAt: {
         type: Date,
         default: Date.now()
@@ -20,7 +24,6 @@ const reviewSChema = new mongoose.Schema({
     DishId:{
         type:mongoose.Schema.Types.ObjectId,ref:'dish'
     }
-
 })
 
  const Review = mongoose.model('review',reviewSChema);
