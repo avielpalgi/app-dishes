@@ -131,10 +131,17 @@ const FullDishCard = (props) => {
                             <li id={key} className="list-group-item">
                                 <div className="row">
                                     <div className="col-2 picDivRev">
+<<<<<<< HEAD
                                         {rev.UserID ? rev.UserID.Picture ? <div><img src={rev.UserID.Picture} /></div> : <div id="profileImage">{rev.UserID.FirstName.charAt(0) + rev.UserID.LastName.charAt(0)}</div> : null}
                                     </div>
                                     <div className="col-10 detailsRev">
                                         <div className="NameRev">{rev.Name ? <p>{rev.Name}</p> : <p>אנונימי</p>}</div>
+=======
+                                        {rev.UserID ? rev.UserID.Picture ? <div><img className="ProfileImageIMG" src={rev.UserID.Picture} /></div> : <div id="profileImage">{rev.UserID.FirstName.charAt(0) + rev.UserID.LastName.charAt(0)}</div> : null}
+                                    </div>
+                                    <div className="col-10 detailsRev">
+                                        <div className="NameRev">{rev.Name ? <span>{rev.Name}</span> : <span>אנונימי</span>}</div>
+>>>>>>> masterbranch
                                         <div className="DateAndRank">
                                             <span>
                                             <Rating style={{ color: getColorForPercentage(rev.Rank / 5) }} emptySymbol={<FontAwesomeIcon icon={["far", "star"]} />} fullSymbol={<FontAwesomeIcon icon={["fa", "star"]} />} {...props} initialRating={rev.Rank} fractions={2} />

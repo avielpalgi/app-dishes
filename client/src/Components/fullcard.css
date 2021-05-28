@@ -54,7 +54,17 @@
 .commentInput{
     width: 80%;
 }
+<<<<<<< HEAD
 
+=======
+.listRev{
+    padding-right: 0;
+    margin: 2%;
+}
+.detailsRev{
+    text-align: right;
+}
+>>>>>>> masterbranch
 #profileImage {
     width: 40px;
     height: 40px;
@@ -66,6 +76,7 @@
     line-height: 40px;
     margin: 20px 0;
   }
+<<<<<<< HEAD
   .listRev{
       margin: 15px;
       padding-right: 0px;
@@ -100,3 +111,12 @@
   }
 
   
+=======
+  .ProfileImageIMG{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 20px 0;
+
+  }
+>>>>>>> masterbranch
