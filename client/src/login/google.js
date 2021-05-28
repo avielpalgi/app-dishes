@@ -32,13 +32,8 @@ const Google = ({dispatchGoogleLoginAction}) => {
       }), console.log("Account created successfully"),
       (message) => console.log(`Error:  ${message}`))
 
-<<<<<<< HEAD
       history.push("/user");
     }
-=======
-     history.push('/user')
-  }
->>>>>>> masterbranch
   const responseErrorGoogle=(response)=>{
 
   }

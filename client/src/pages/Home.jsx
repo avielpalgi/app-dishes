@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import "./home.css";
+import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DishCard from '../Components/DishCard';
 
 function Home(props) {

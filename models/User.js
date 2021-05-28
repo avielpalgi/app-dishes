@@ -25,9 +25,6 @@ const User = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    Picture:{
-        type:String
-    },
     isDeleted: {
         type: Boolean,
         default: false
