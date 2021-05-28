@@ -10,6 +10,7 @@
     "start": "nodemon server.js",
     "server": "nodemon server.js",
     "client": "cd client && npm start",
+    "start:original": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
     "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon server.js\" \"npm run client\""
   },
   "author": "",
