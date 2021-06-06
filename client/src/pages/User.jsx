@@ -9,7 +9,7 @@ import Geocode from "react-geocode";
 import Map from './Map';
 import {changeLocation} from '../redux/actions/locationAction'
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-Geocode.setApiKey("AIzaSyDPyGwLnQ3lW6Le8phnQAsvbKED2vDsd0w");
+Geocode.setApiKey("");
 
 // set response language. Defaults to english.
 Geocode.setLanguage("he");

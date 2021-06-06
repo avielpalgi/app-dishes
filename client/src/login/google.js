@@ -31,7 +31,7 @@ const Google = ({dispatchGoogleLoginAction}) => {
     <div className="googleDiv">
     {!isUserLoggedIn && (
       <GoogleLogin
-        clientId="894154508942-abj25d49dcrkjigeei6a5hedmjn2cu19.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+        clientId="" //CLIENTID NOT CREATED YET
         className="btnG"
         render={(renderProps) => (
           <button

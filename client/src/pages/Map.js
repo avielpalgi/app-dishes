@@ -245,7 +245,7 @@ function MapReact({navbar,user, Mylat, Mylng,dispatchLocation}) {
                         </div>
                         <LoadScript
                             //libraries= 'places'
-                            googleMapsApiKey='AIzaSyDPyGwLnQ3lW6Le8phnQAsvbKED2vDsd0w'>
+                            googleMapsApiKey=''>
                             <GoogleMap
                                 mapContainerStyle={mapStyles}
                                 zoom={zoom}

@@ -25,7 +25,7 @@ const Facebook = ({dispatchFacebookLoginAction}) => {
             <div className="FacebookBTN">
                 {/* {fbContent} */}
                 <FacebookLoginBtn
-                    appId="584439855868380" //Facebook Developer ID
+                    appId="" //Facebook Developer ID
                     //scope="public_profile, email"
                     autoLoad={false}
                     //fields="email,first_name,last_name,picture.width(280).height(280)"
