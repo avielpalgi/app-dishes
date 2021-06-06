@@ -7,7 +7,7 @@ const User = require('../models/User');
 
 module.exports = {
     index: async (req, res, next) => {
-        const dish = await Dish.find({}).populate({ path: 'Reviews', model: 'review', populate: { path: 'UserID', model: 'user' } }).populate('Restaurant');
+        const dish = await Dish.find({}).populate({ path: 'Reviews', model: 'review', populate: { path: 'UserID', model: 'user' } }).populate({ path: 'Restaurant', model: 'restaurant', populate: { path: 'Menu', model: 'dish' } });
        
         let sum = 0;
         let temp = [];
@@ -20,6 +20,12 @@ module.exports = {
                     sum += review.Rank;
                 }
                 element.AvgRank = sum / element.Reviews.length;
+            }
+            for (let j = 0; j < element.Restaurant.Menu.length; j++) {
+                const restDish = element.Restaurant.Menu[j];
+                if (restDish.Name === element.Name) {
+                    restDish.AvgRank = sum / element.Reviews.length;
+                }
             }
             temp.push(element);
         }

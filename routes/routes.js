@@ -5,6 +5,7 @@ const UserSession = require('../models/UserSession');
 const userController = require('../controllers/user');
 const restaurantController = require('../controllers/restaurant');
 const dishController = require('../controllers/dish');
+const searchController = require('../controllers/search');
 router.route('/users').get((req, res) => {
     User.find()
         .then(users => res.json(users))
@@ -213,14 +214,8 @@ router.get('/users/logout',(req,res,next)=>{
 
 router.post('/users/register',userController.register); //Register Controller
 router.post('/users/login',userController.login);  //Login Controller
-<<<<<<< HEAD
 router.post('/users/facebookLogin',userController.facebookLogin) // Login with Facebook
 router.post('/users/googleLogin',userController.googleLogin) // Login with Google
-=======
-router.post('/users/facebookLogin',userController.facebookLogin);  //Login Controller
-router.post('/users/googleLogin',userController.googleLogin);  //Login Controller
-
->>>>>>> masterbranch
 
 router.post('/favorites/:userId',userController.AddtoFavorite)
 
@@ -260,5 +255,8 @@ router.route('/dish/:dishId')
 router.route('/dish/:dishId/reviews')
 .get(dishController.getDishReviews)
 .post(dishController.newDishReview)
+
+router.route('/search')
+.get(searchController.getDetails)
 
 module.exports = router
