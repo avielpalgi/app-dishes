@@ -74,7 +74,7 @@ cursor: pointer;
     .responsive-toolbar ul {
             height: 100%;
             width: 250px;
-            right: -200px;
+            right: -250px;
             position: fixed;
             top: 60px;
             flex-direction: column;
@@ -90,13 +90,28 @@ cursor: pointer;
                 right: 10px;
                 top: 5px;
                 font-size: 30px;
-                color: #ccc;
+                color: rgb(255, 255, 255);
             }
 
             .responsive-toolbar ul li {
                 width: 100%;
                 padding-left: 0;
                 padding-right: 0;
+            }
+            .responsive-toolbar ul li a{
+                font-size: 24px;
+                direction: rtl;
+            }
+            .responsive-toolbar ul li a .svg-inline--fa{
+                margin: 2%;
+                margin-left: 7%;
+                margin-right: 5%;
+            }
+
+            #active li a .svg-inline--fa{
+                margin: 2%;
+                margin-left: 7%;
+                margin-right: 6%;
             }
 /* 
             .responsive-toolbar a {

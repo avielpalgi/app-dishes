@@ -75,7 +75,7 @@ const DishCard = (props) => {
 
     return (
         <div className="col-xs-12 col-sm-6 col-lg-4 divcard">
-            <div className="card">
+            <div className="cardItem">
                 <div className="card-header">
                     <img className="card-img-top" src={dish.Images.Normal.url} alt={dish.Name} />
                     <span className={classFavor} onClick={() => { addToFavorite(dish) }}><i class="fas fa-heart fa-inverse" data-fa-transform="shrink-8 fa-border"></i></span>
@@ -84,8 +84,8 @@ const DishCard = (props) => {
                 <div class="card-body">
                     <div className="divDetails row">
                             <div className="col-8 rightSide">
+                            <Link to={{pathname: "/restaurant", state:{Rest:dish.Restaurant}}}> <p className="restName">{dish.Restaurant.Name}</p></Link>
                                 <p className="restType">סוג מנה: {dish.Type}</p>
-                                <p className="restName">מסעדה: {dish.Restaurant.Name}</p>
                                 <p className="restAddress">כתובת: {dish.Restaurant.Address}</p>
                                 <Link to={{ pathname: "/fulldishcard", state: { dish: dish } }}><p className="DishDetails">לחץ לפרטים נוספים</p></Link>
                             </div>

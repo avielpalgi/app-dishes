@@ -1,34 +1,34 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, LoadScript, Circle, Marker } from '@react-google-maps/api';
-import Slider from '@material-ui/core/Slider';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+//import Slider from '@material-ui/core/Slider';
 import list from '../Data.json';
 import { Card } from 'react-bootstrap';
 import { faTimes,faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Typography from '@material-ui/core/Typography';
-import SearchBar from "material-ui-search-bar";
+//import Typography from '@material-ui/core/Typography';
+//import SearchBar from "material-ui-search-bar";
+//import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+//import TextField from '@material-ui/core/TextField';
+//import { Autocomplete } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/core/styles';
-import { ReactSearchAutocomplete } from 'react-search-autocomplete'
-import TextField from '@material-ui/core/TextField';
-import { Autocomplete } from '@material-ui/lab';
+
 import {withRouter} from 'react-router-dom';
 import './map.css';
 import { connect } from 'react-redux'
-
+import {changeLocation} from '../redux/actions/locationAction'
 const useStyles = makeStyles((theme) => ({
 
 
 
 }));
 
-function MapReact({navbar,user}) {
-    const [navBar, setnavbar] = useState(navbar.data)
+function MapReact({navbar,user, Mylat, Mylng,dispatchLocation}) {
     const [selectedRest, setSelectedRest] = useState("")
     const classes = useStyles();
     const [listSearch, setListSearch] = useState([])
     const [search, setSearch] = useState("");
-    const [lat, setlat] = useState(null)
-    const [long, setlong] = useState(null)
+    const [lat, setlat] = useState(Mylat)
+    const [long, setlong] = useState(Mylng)
     const [value, setvalue] = useState(0)
     const [value2, setvalue2] = useState(8000)
     const [zoom, setzoom] = useState(11)
@@ -42,31 +42,14 @@ function MapReact({navbar,user}) {
     const [thisRest, setThisRest] = useState({ Address: null, Name: null, Menu: [] })
     const [res, setRes] = useState([])
     const [widthNav, setWidthNav] = useState(62);
-    const onLoad = circle => {
-        // console.log('Circle onLoad circle: ', circle)
-    }
-
-    useEffect(() => {
-      console.log('navbar',navbar.data);
-      if (navbar.data) {
-        console.log('navbar',navbar.data);
-          setWidthNav(265);
-      }else{
-        console.log('navbar',navbar.data);
-        setWidthNav(65);
-      }
-    }, )
-
-    const onUnmount = circle => {
-        // console.log('Circle onUnmount circle: ', circle)
-    }
+  
     useEffect(() => {        
         let temp = [];
         fullList.map(rest => temp.push({ id: rest.Id, name: rest.Name }))
         setListSearch(temp)
         window.addEventListener("resize", handleResize,handleResizeWidth);
         OrderNewList();
-        getLocation();
+        //getLocation();
     }, []);
 
 
@@ -144,21 +127,6 @@ function MapReact({navbar,user}) {
 
     }
 
-    //Google Map
-    const getLocation = async () => {
-        let latitude = "";
-        let longitude = "";
-        await navigator.geolocation.getCurrentPosition((position) => {
-            latitude = position.coords.latitude;
-            longitude = position.coords.longitude;
-            changePosition(latitude, longitude);
-        });
-    }
-    const changePosition = (latitude, longitude) => {
-        setlat(latitude);
-        setlong(longitude);
-    }
-
     const valuetext = (value) => {
         return `${value} km`;
     }
@@ -183,7 +151,7 @@ function MapReact({navbar,user}) {
 
     const mapStyles = {
         width: '100%',
-        height: `${windowHeight-50}px`,
+        height: `300px`,
     };
     const options = {
         strokeColor: '#FF0000',
@@ -206,6 +174,7 @@ function MapReact({navbar,user}) {
         lat: lat, lng: long
 
     }
+    
     const handleOnSearch = (string, results) => {
         // onSearch will have as the first callback parameter
         // the string searched and for the second the results.
@@ -235,6 +204,17 @@ function MapReact({navbar,user}) {
        }
     }, [selectedRest])
 
+
+    const changeMyLocation =(ev)=>{
+        console.log("latitide = ", ev.latLng.lat());
+        console.log("longitude = ", ev.latLng.lng());
+        let loc = {
+            lat:ev.latLng.lat(),
+            lng:ev.latLng.lng()
+        }
+        dispatchLocation(loc);
+    }
+
     return (
         <div className="" >
             {lat ?
@@ -250,7 +230,7 @@ function MapReact({navbar,user}) {
                                 autoFocus
                                 styling={{ zIndex: 2 }} // To display it on top of the search box below
                             /> */}
-                            <Autocomplete
+                            {/* <Autocomplete
                             popupIcon= {<FontAwesomeIcon icon={faSearch}/>}
                                 id="combo-box-demo"
                                 options={listSearch}
@@ -258,13 +238,11 @@ function MapReact({navbar,user}) {
                                 getOptionSelected={(e)=>setSelectedRest(e)}
                                 getOptionLabel={(option) => option.name}
                                 renderInput={(params) => <TextField {...params} label="" variant="outlined" />}
-                            />
+                            /> */}
                             {/* <div>
                         <ul>{res? res.map(rest=><li>{rest.name}</li>):null}</ul>
                         </div> */}
                         </div>
-
-
                         <LoadScript
                             //libraries= 'places'
                             googleMapsApiKey='AIzaSyDPyGwLnQ3lW6Le8phnQAsvbKED2vDsd0w'>
@@ -272,11 +250,14 @@ function MapReact({navbar,user}) {
                                 mapContainerStyle={mapStyles}
                                 zoom={zoom}
                                 center={defaultCenter}
+                                onClick={ev => {
+                                    changeMyLocation(ev);
+                                  }}
                             >
-                                <Marker
+                                {/* <Marker
                                     position={position}
-                                />
-                                {markers.map(marker => (
+                                /> */}
+                                {/* {markers.map(marker => (
                                     <Marker
                                         key={marker.id}
                                         onClick={() => { showMenu(marker.id) }}
@@ -284,8 +265,13 @@ function MapReact({navbar,user}) {
                                         position={marker.position}
                                         title={marker.title}
                                     />
-                                ))}
-                                <Circle
+                                ))} */}
+                                  <Marker
+                                        key="id"
+                                       
+                                        position={{lat:lat,lng:long}}
+                                    />
+                                {/* <Circle
                                     // optional
                                     onLoad={onLoad}
                                     // optional
@@ -294,40 +280,9 @@ function MapReact({navbar,user}) {
                                     center={defaultCenter}
                                     // required
                                     options={options}
-                                />
+                                /> */}
                             </GoogleMap>
                         </LoadScript>
-                        <div>
-                            {showRestBool ? showRest() : ""}
-                        </div>
-                        {/* <div className="rangeclass">
-                            <Typography id="range-slider1" gutterBottom>
-                                זום
-                            </Typography>
-                            <Slider
-                                color="secondary"
-                                value={value}
-                                aria-labelledby="discrete-slider-custom"
-                                onChange={handleChange}
-                                aria-label="ddd"
-                            />
-                            <Typography id="range-slider2" gutterBottom>
-                                רדיוס בק"מ
-                            </Typography>
-                            <Slider
-                                getAriaValueText={valuetext}
-                                //aria-valuetext={this.getLabel}
-                                color="secondary"
-                                value={value2}
-                                aria-label="ddd"
-                                aria-labelledby="discrete-slider-custom"
-                                onChange={handleChange2}
-                                valueLabelDisplay="on"
-                                //getAriaLabel={this.getLabel}
-                                min={1000}
-                                max={20000}
-                            />
-                        </div> */}
                     </div>
 
                 </div>
@@ -340,6 +295,11 @@ function MapReact({navbar,user}) {
 
 const mapStateToProps = (state) => ({
     user: state.user,
-    navbar: state.navbar
+    navbar: state.navbar,
+    location:state.location
   });
-export default withRouter(connect(mapStateToProps)(MapReact));
+  const mapDispatchToProps = (dispatch) => ({
+      dispatchLocation: (location, onSuccess,onError)=>
+      dispatch(changeLocation(location, onSuccess,onError))
+  });
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(MapReact));

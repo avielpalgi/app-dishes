@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Row, Container, Col, FormControl, Button, Form } from "react-bootstrap";
 import InputGroup from 'react-bootstrap/InputGroup'
-import { FaUnlockAlt, FaUndo, FaUserAlt, FaLock } from "react-icons/fa";
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
+import { FaUndo, FaUserAlt, FaLock } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { withRouter, Link } from 'react-router-dom'
 import "./Login.css";
-import { setInStorage, getFromStorage } from '../helpers/storage';
+//import { setInStorage, getFromStorage } from '../helpers/storage';
 import { connect } from 'react-redux';
 import { registerUser } from '../redux/actions/authActionCreators';
 

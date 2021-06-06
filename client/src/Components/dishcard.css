@@ -7,6 +7,11 @@
     margin:10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
+.cardItem{
+    margin:10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    border-radius: 4px;
+}
 .card-header{
     position: relative;
     padding: 0;
@@ -35,10 +40,12 @@
 }
 .restName{
     text-align: right;
+    color: rgb(0, 112, 15);
     margin-right: 1%;
-font-size: 12px;
+font-size: 14px;
 margin-top: -3px;
 margin-bottom: -3px;
+font-weight: 600;
 }
 .restType{
     text-align: right;

@@ -8,8 +8,6 @@ function Home(props) {
     const apiUrl = 'http://localhost:4000';
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
     const [dishes, setDishes] = useState([]);
-    const [classFavorite, setclassFavorite] = useState("favor")
-    const [ifFavor, setIfFavor] = useState(false)
     const [favorites, setFavorites] = useState([])
     useEffect(() => {
         window.addEventListener("resize", handleResize);
@@ -54,40 +52,6 @@ function Home(props) {
         console.log("state", dishes);
     }
 
-    var percentColors = [
-        { pct: 0.5, color: { r: 0xff, g: 0x00, b: 0 } },
-        { pct: 0.7, color: { r: 0xff, g: 0xff, b: 0 } },
-        { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } }];
-
-    var getColorForPercentage = function (pct) {
-        for (var i = 1; i < percentColors.length - 1; i++) {
-            if (pct < percentColors[i].pct) {
-                break;
-            }
-        }
-        var lower = percentColors[i - 1];
-        var upper = percentColors[i];
-        var range = upper.pct - lower.pct;
-        var rangePct = (pct - lower.pct) / range;
-        var pctLower = 1 - rangePct;
-        var pctUpper = rangePct;
-        var color = {
-            r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
-            g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
-            b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
-        };
-        return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
-        // or output as hex if preferred
-    };
-
-    const ChangeClassFavorite = () => {
-        if (classFavorite === "favor") {
-            setclassFavorite("favor red")
-        }
-        else {
-            setclassFavorite("favor")
-        }
-    }
     const addToFavorite = (dish) => {
         props.dispatchLoading();
         console.log("HomePage", dish);
@@ -113,11 +77,13 @@ function Home(props) {
                     },
 
                     (error) => {
+                        props.dispatchLoading();
                         console.log("err post=", error);
                     }
                 )
         }
         else {
+            props.dispatchLoading();
             console.log("אתה צריך להירשם");
         }
 
@@ -148,24 +114,24 @@ function Home(props) {
                     },
 
                     (error) => {
+                        props.dispatchLoading();
                         console.log("err post=", error);
                     }
                 )
         }
         else {
+            props.dispatchLoading();
             console.log("אתה צריך להירשם");
         }
     }
 
     return (
         <div className="MainDiv" >
-            <h1>דף ראשי</h1>
             <div className="chooseOrder">
                 <p>סדר לפי: </p>
                 <div className="row">
                     <div className="col-6 ButtonClass">
                         <button className="btn btn-secondary" onClick={() => { sortByDistance() }}>קרוב אליי</button>
-
                     </div>
                     <div className="col-6 ButtonClass">
                         <button className="btn btn-secondary" onClick={() => { sortByRank() }}>דירוג</button>
@@ -186,39 +152,3 @@ function Home(props) {
 }
 
 export default Home
-
-   // <li id={key}>
-                        //     {dish.Images.Normal ?
-                        //         <div className="divImage" style={{
-                        //             backgroundPosition: 'center',
-                        //             backgroundImage: `url(${dish.Images.Normal.url})`,
-                        //             backgroundRepeat: 'no-repeat',
-                        //             backgroundSize: 'cover',
-                        //             width: '100%',
-                        //             height: '180px'
-                        //         }}>
-                        //             <span className={classFavorite} onClick={() => { addToFavorite(dish) }}><i class="fas fa-heart fa-inverse" data-fa-transform="shrink-8 fa-border"></i></span>
-                        //             <p className="dishName">{dish.Name}</p>
-                        //         </div> :
-                        //         <div className="divImage" style={{
-                        //         }}>
-                        //             <p className="dishName">{dish.Name}</p>
-                        //         </div>
-                        //     }
-                        //     <div className="divDetails">
-                        //         <div className="row">
-                        //             <div className="col-8 rightSide">
-                        //                 <p className="restType">סוג מנה: {dish.Type}</p>
-                        //                 <p className="restName">מסעדה: {dish.Restaurant.Name}</p>
-                        //                 <p className="restAddress">כתובת: {dish.Restaurant.Address}</p>
-                        //             </div>
-                        //             <div className="col-4 leftSide">
-                        //                 <p className="restDistance">{dish.Restaurant.distance} ק"מ ממך</p>
-                        //                 <div className="RankDiv" style={{ color: getColorForPercentage(dish.AvgRank / 5) }}>
-                        //                     <span className="rankIcon"><FontAwesomeIcon icon={faStar} /></span>
-                        //                     <span className="restRank">{dish.AvgRank}</span>
-                        //                 </div>
-                        //             </div>
-                        //         </div>
-                        //     </div>
-                        // </li>

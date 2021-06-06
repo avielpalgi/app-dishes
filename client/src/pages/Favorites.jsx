@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import "./home.css";
-import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DishCard from '../Components/DishCard';
 
 const Favorites = (props) => {
@@ -10,8 +8,6 @@ const Favorites = (props) => {
     const apiUrl = 'http://localhost:4000';
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
     const [dishes, setDishes] = useState([]);
-    const [classFavorite, setclassFavorite] = useState("favor")
-    const [ifFavor, setIfFavor] = useState(false)
     const [favorites, setFavorites] = useState([])
     useEffect(() => {
         window.addEventListener("resize", handleResize);
@@ -55,36 +51,8 @@ const Favorites = (props) => {
         setDishes([...tempList]);
         console.log("state", dishes);
     }
-
-    var percentColors = [
-        { pct: 0.5, color: { r: 0xff, g: 0x00, b: 0 } },
-        { pct: 0.7, color: { r: 0xff, g: 0xff, b: 0 } },
-        { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } }];
-
-    var getColorForPercentage = function (pct) {
-        for (var i = 1; i < percentColors.length - 1; i++) {
-            if (pct < percentColors[i].pct) {
-                break;
-            }
-        }
-        var lower = percentColors[i - 1];
-        var upper = percentColors[i];
-        var range = upper.pct - lower.pct;
-        var rangePct = (pct - lower.pct) / range;
-        var pctLower = 1 - rangePct;
-        var pctUpper = rangePct;
-        var color = {
-            r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
-            g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
-            b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
-        };
-        return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
-        // or output as hex if preferred
-    };
-
     
 const removeFromFavorite = (dish) => {
-    
     props.dispatchLoading();
     console.log("HomePage remove", dish);
     if (props.user.userId) {
@@ -107,22 +75,21 @@ const removeFromFavorite = (dish) => {
                     }, 800);
                     // setFavorites(result.Favorites);
                 },
-
                 (error) => {
+                    props.dispatchLoading();
                     console.log("err post=", error);
                 }
             )
     }
     else {
+        props.dispatchLoading();
         console.log("אתה צריך להירשם");
     }
 }
 
     return (
         <div>
-            <h2>רשימת המנות שלי: </h2>
             <div className="MainDiv" >
-            <h1>דף ראשי</h1>
             <div className="chooseOrder">
                 <p>סדר לפי: </p>
                 <div className="row">

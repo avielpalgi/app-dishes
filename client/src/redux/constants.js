@@ -8,4 +8,6 @@ export const RESET_USER_INFO = 'RESET_USER_INFO';
 export const TOOGLE_STOP = 'TOOGLE_STOP';
 export const SET_NAVBAR = 'SET_NAVBAR';
 export const RESET_NAVBAR = 'RESET_NAVBAR';
+export const SET_LOCATION = 'SET_LOCATION';
+export const RESET_LOCATION = 'RESET_LOCATION';
 

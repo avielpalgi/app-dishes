@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback, useStyles } from 'react'
-import { faStar, faDirections, faMapMarkerAlt, faPhoneAlt, faLink } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from 'react'
+import { faStar, faDirections, faMapMarkerAlt, faPhoneAlt, faLink, faArrowUp, faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './fullcard.css';
 import Rating from 'react-rating'
@@ -24,10 +24,6 @@ const FullDishCard = (props) => {
 
     const saveReview = () => {
         props.dispatchLoading();
-        console.log("name", name);
-        console.log("comment", comment);
-        console.log("rating", rating);
-        console.log("user", props.user.userId);
         const Review = {
             Name: name,
             Rank: rating,
@@ -55,18 +51,20 @@ const FullDishCard = (props) => {
                             props.dispatchLoading();
                         }, 800);
                     },
-
                     (error) => {
+                        props.dispatchLoading();
                         console.log("err post=", error);
                     }
                 )
         }
         else {
+            props.dispatchLoading();
             console.log("אתה צריך להירשם");
         }
     }
 
-    const directToGoogleMap = () => {
+    const directToGoogleMap = (lat, lng, address, name) => {
+        window.open("https://maps.google.com?q=" + name);
 
     }
 
@@ -96,6 +94,34 @@ const FullDishCard = (props) => {
         return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
         // or output as hex if preferred
     };
+
+    const ReviewsbyRank = () => {
+        let temp = reviews;
+        console.log(reviews);
+        temp.sort((a, b) => a.Rank - b.Rank).reverse();
+        console.log('tempList', temp);
+        setReviews([...temp]);
+    }
+    const ReviewsbyDate = () => {
+        let temp = reviews;
+        temp.sort((a, b) => new Date(a.CommentedAt) - new Date(b.CommentedAt)).reverse();
+        console.log('tempList', temp);
+        setReviews([...temp]);
+    }
+    const ReviewsbyRankReverse = () => {
+        let temp = reviews;
+        console.log(reviews);
+        temp.sort((a, b) => a.Rank - b.Rank);
+        console.log('tempList', temp);
+        setReviews([...temp]);
+    }
+    const ReviewsbyDateReverse = () => {
+        let temp = reviews;
+        temp.sort((a, b) => new Date(a.CommentedAt) - new Date(b.CommentedAt));
+        console.log('tempList', temp);
+        setReviews([...temp]);
+    }
+
     return (
         <div className="MainDiv">
             <div className="header">
@@ -104,11 +130,11 @@ const FullDishCard = (props) => {
             </div>
             <div class="bodyCard">
                 <div className="divDetails">
-                    <div className="row">
+                    <div className="row detailsRow">
                         <div className="col-8 rightSide">
+                            <p className="restName">{dish.Restaurant.Name}</p>
                             <p className="restType">סוג מנה: {dish.Type}</p>
-                            <p className="restName">מסעדה: {dish.Restaurant.Name}</p>
-                            <p className="restName">מחיר: {dish.Price} ₪</p>
+                            <p className="restType">מחיר: {dish.Price} ₪</p>
                             <p className="restAddress">כתובת: {dish.Restaurant.Address}</p>
                             {dish.Restaurant.Phone ? <p className="restAddress">טלפון: {dish.Restaurant.Phone}</p> : null}
                         </div>
@@ -119,37 +145,34 @@ const FullDishCard = (props) => {
                                 <span className="restRank">{parseFloat(dish.AvgRank).toFixed(1)}</span>
                             </div>
                             <div className="col links">
-                                <button className="diraction btn btn-primary"><FontAwesomeIcon icon={faLink} /></button>
-                                <button className="diraction btn btn-primary"><FontAwesomeIcon icon={faPhoneAlt} /></button>
-                                <button className="diraction btn btn-primary" onClick={() => { directToGoogleMap() }}><FontAwesomeIcon icon={faMapMarkerAlt} /></button>
+                                {dish.Restaurant.Website ? <a className="diraction" href={dish.Restaurant.Website} target="blank"><FontAwesomeIcon icon={faLink} /></a> : null}
+                                {dish.Restaurant.Phone ? <a href={"tel:" + dish.Restaurant.Phone} className="diraction"><FontAwesomeIcon icon={faPhoneAlt} /></a> : null}
+                                <span className="diraction"><FontAwesomeIcon onClick={() => { directToGoogleMap(dish.Restaurant.location.lat, dish.Restaurant.location.lng, dish.Restaurant.Address) }} icon={faMapMarkerAlt} /></span>
                             </div>
                         </div>
                     </div>
                     <div className="title"><h2>ביקורות: </h2></div>
+                    <div className="sorts">
+                        <p>לפי דירוג <FontAwesomeIcon icon={faArrowDown} onClick={() => { ReviewsbyRankReverse() }} /><FontAwesomeIcon onClick={() => { ReviewsbyRank() }} icon={faArrowUp} /></p>
+                        <p>לפי תאריך <FontAwesomeIcon icon={faArrowDown} onClick={() => { ReviewsbyDateReverse() }} /><FontAwesomeIcon icon={faArrowUp} onClick={() => { ReviewsbyDate() }} /></p>
+                    </div>
                     <ul className="list-group listRev">
                         {reviews ? reviews.map((rev, key) =>
                             <li id={key} className="list-group-item">
                                 <div className="row">
                                     <div className="col-2 picDivRev">
-<<<<<<< HEAD
-                                        {rev.UserID ? rev.UserID.Picture ? <div><img src={rev.UserID.Picture} /></div> : <div id="profileImage">{rev.UserID.FirstName.charAt(0) + rev.UserID.LastName.charAt(0)}</div> : null}
+                                        {rev.UserID ? rev.UserID.Picture ? <div><img alt={rev.UserID.FirstName + " " + rev.UserID.LastName} src={rev.UserID.Picture} /></div> : <div id="profileImage">{rev.UserID.FirstName.charAt(0) + rev.UserID.LastName.charAt(0)}</div> : null}
                                     </div>
                                     <div className="col-10 detailsRev">
                                         <div className="NameRev">{rev.Name ? <p>{rev.Name}</p> : <p>אנונימי</p>}</div>
-=======
-                                        {rev.UserID ? rev.UserID.Picture ? <div><img className="ProfileImageIMG" src={rev.UserID.Picture} /></div> : <div id="profileImage">{rev.UserID.FirstName.charAt(0) + rev.UserID.LastName.charAt(0)}</div> : null}
-                                    </div>
-                                    <div className="col-10 detailsRev">
-                                        <div className="NameRev">{rev.Name ? <span>{rev.Name}</span> : <span>אנונימי</span>}</div>
->>>>>>> masterbranch
                                         <div className="DateAndRank">
                                             <span>
-                                            <Rating style={{ color: getColorForPercentage(rev.Rank / 5) }} emptySymbol={<FontAwesomeIcon icon={["far", "star"]} />} fullSymbol={<FontAwesomeIcon icon={["fa", "star"]} />} {...props} initialRating={rev.Rank} fractions={2} />
+                                                <Rating readonly style={{ color: getColorForPercentage(rev.Rank / 5) }} emptySymbol={<FontAwesomeIcon icon={["far", "star"]} />} fullSymbol={<FontAwesomeIcon icon={["fa", "star"]} />} {...props} initialRating={rev.Rank} fractions={2} />
                                             </span>
                                             <span>
-                                            <ReactTimeAgo className="dateRev" date={rev.CommentedAt} locale="en-US" />
+                                                <ReactTimeAgo className="dateRev" date={rev.CommentedAt} locale="en-US" />
                                             </span>
-                                                
+
                                         </div>
 
 

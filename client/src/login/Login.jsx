@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Container, Col, Card, Button, Form } from "react-bootstrap";
-import axios from 'axios';
 import { connect } from 'react-redux'
 import { loginUser } from './../redux/actions/authActionCreators'
 import Swal from "sweetalert2";
 import "./Login.css";
 import Facebook from "./facebook";
 import Google from "./google";
-import { getFromStorage, setInStorage } from '../helpers/storage'
+//import { getFromStorage, setInStorage } from '../helpers/storage'
 import { withRouter, Link } from 'react-router-dom'
 
 function Login({ windowHeight, dispatchLoginAction }) {

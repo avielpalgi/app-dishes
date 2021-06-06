@@ -1,27 +1,16 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import GoogleLogin from "react-google-login";
 import Swal from "sweetalert2";
-import {Redirect,useHistory} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import { connect } from 'react-redux';
 import { GoogleLoginUser } from '../redux/actions/authActionCreators';
 
 const Google = ({dispatchGoogleLoginAction}) => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
-  const [userDetails, setUserDetails] = useState("")
   const history = useHistory();
 
   const responseSuccessGoogle = (response) => {
-    setIsUserLoggedIn(true);
-    setUserDetails(response.profileObj)
-    const GoogleUser = {
-      Email: userDetails.email,
-      FirstName: userDetails.givenName,
-      LastName: userDetails.familyName,
-      Password: "GooglePassword",
-    };
-    console.log(response);
-
-
+    setIsUserLoggedIn(true);   
     dispatchGoogleLoginAction(response.tokenId,
       () => Swal.fire({
         position: "center",
@@ -32,13 +21,8 @@ const Google = ({dispatchGoogleLoginAction}) => {
       }), console.log("Account created successfully"),
       (message) => console.log(`Error:  ${message}`))
 
-<<<<<<< HEAD
       history.push("/user");
     }
-=======
-     history.push('/user')
-  }
->>>>>>> masterbranch
   const responseErrorGoogle=(response)=>{
 
   }

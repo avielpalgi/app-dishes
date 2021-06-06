@@ -2,8 +2,19 @@
     height: 240px;
     width: 100%;
 }
+.MainDiv{
+    margin-right: 0px;
+}
 .header{
+    width: 40%;
     position: relative;
+    display: inline-flex;
+}
+.detailsRow{
+    display: inline-flex;
+    width: 60%;
+    
+    margin: 1% 0% 5% 0%;
 }
 .dishName{
     color: white;
@@ -54,29 +65,18 @@
 .commentInput{
     width: 80%;
 }
-<<<<<<< HEAD
 
-=======
-.listRev{
-    padding-right: 0;
-    margin: 2%;
-}
-.detailsRev{
-    text-align: right;
-}
->>>>>>> masterbranch
 #profileImage {
-    width: 40px;
-    height: 40px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     background: #512DA8;
     font-size: 16px;
     color: #fff;
     text-align: center;
-    line-height: 40px;
-    margin: 20px 0;
+    line-height: 100px;
+    margin: 10px 0;
   }
-<<<<<<< HEAD
   .listRev{
       margin: 15px;
       padding-right: 0px;
@@ -103,20 +103,133 @@
     display: flex;
   }
   .picDivRev img{
-      height: 40px;
-      width: 40px;
-      margin: 20px 0;
+      height: 100px;
+      width: 100px;
+      margin: 10px 0;
       border-radius: 50%;
+  }
+  .sorts{
+    display: flex;
+    justify-content: center;
+  }
+  .sorts p {
+      margin: 5px;
+  }
 
+
+  @media only screen and (max-width: 600px) {
+    .detailsRow{
+        width: 100%;
+        display:auto;
+    }
+    .imageDish{
+        height: 240px;
+        width: 100%;
+    }
+    .header{
+        width: 100%;
+        position: relative;
+    }
+    .dishName{
+        color: white;
+        background-color: rgb(190, 190, 190,0.6);
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        /* center the element */
+        right: 0;
+        left: 0;
+        margin: 0px;    
+    }
+    .title{
+        place-content: center;
+    }
+    .revDish{
+        text-align: right;
+    }
+    .revDish span{
+        margin: 10px;
+    }
+    .addRev .btn{
+        margin: 20px;
+    }
+    .diraction{
+        padding: 0;
+    
+    }
+    .diraction svg{
+        font-size: 14px;
+    }
+    .links{
+        margin: 1px;
+        display: flex;
+        justify-content: center;
+    }
+    .links button{
+        margin: 1px;
+        width: 30px;
+    }
+    .links .svg-inline--fa{
+        width: 30px;
+        text-align: center;
+    }
+    .nameInput{
+        width: 60%;
+    }
+    .commentInput{
+        width: 80%;
+    }
+    
+    #profileImage {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #512DA8;
+        font-size: 16px;
+        color: #fff;
+        text-align: center;
+        line-height: 40px;
+        margin: 20px 0;
+      }
+      .listRev{
+          margin: 15px;
+          padding-right: 0px;
+      }
+      .detailsRev{
+          margin-top: 3%;
+          text-align: right;
+      }
+      .detailsRev p{
+          margin: 1px;
+      }
+      .dateRev{ 
+          font-size: 12px;
+        display: block;
+        direction: ltr;
+        margin-right: 10px;
+    }
+     
+      .NameRev{
+          font-weight: 600;
+          font-size: 18px;
+      }
+      .DateAndRank{
+        display: flex;
+      }
+      .picDivRev img{
+          height: 40px;
+          width: 40px;
+          margin: 20px 0;
+          border-radius: 50%;
+    
+      }
+      .sorts{
+        display: flex;
+        justify-content: center;
+      }
+      .sorts p {
+          margin: 5px;
+      }
   }
 
   
-=======
-  .ProfileImageIMG{
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 20px 0;
-
-  }
->>>>>>> masterbranch

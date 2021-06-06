@@ -7,7 +7,6 @@ import AddDish from './AddDish';
 
 function Edit() {
     const [windowHeight, setWindowHeight] = useState(window.innerHeight)
-    const [editTitle, seteditTitle] = useState("הוספת מסעדה")
     const [options, setOptions] = useState([{ label: "סוג עריכה", value: "" }, { label: "הוספת מסעדה", value: "הוספת מסעדה" }, { label: "הוספת מנה", value: "הוספת מנה" }])
     const [selected, setSelected] = useState({ label: "סוג עריכה", value: "" })
     useEffect(() => {

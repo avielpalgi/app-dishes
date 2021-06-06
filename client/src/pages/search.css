@@ -49,3 +49,11 @@ h1{
     margin-top: 5px;
     margin-bottom: 5px;
 }
+
+.listDishes{
+    margin-bottom: 8%;
+}
+.searchDiv{
+    position: none;
+    margin: 20px;
+}
